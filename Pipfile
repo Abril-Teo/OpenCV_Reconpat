@@ -9,6 +9,7 @@ opencv-python = "*"
 pillow = "*"
 pytesseract = "*"
 scikit-image = "*"
+pytest = "*"
 
 [dev-packages]
 
