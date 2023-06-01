@@ -57,3 +57,13 @@ cv2.drawContours(canvas, [license], -1, (0, 255, 0), 2)
 plt.axis('off')
 mostrarImagen(path, canvas)
 
+x,y,w,h = cv2.boundingRect(license)
+recortado = imagen[y:y+h,x:x+w]
+mostrarImagen(path, recortado)
+
+gris_recortado = cv2.cvtColor(recortado, cv2.COLOR_BGR2GRAY)
+threshold_recortado = cv2.adaptiveThreshold(gris_recortado , 255 ,cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY_INV , 7 , 13)
+mostrarImagen(path, threshold_recortado)
+
+bordes = skimage.segmentation.clear_border(threshold_recortado)
+mostrarImagen(path, bordes)
