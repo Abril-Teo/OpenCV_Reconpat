@@ -12,7 +12,7 @@ def mostrarImagen(path, img):
 
 
 
-path = 'imgs/001.png'
+path = 'imgs/007.png'
 
 imagen = cv2.imread(path)
 mostrarImagen(path, imagen)
@@ -24,5 +24,36 @@ threshold = cv2.threshold(gris, 170, 255, cv2.THRESH_BINARY_INV)[1]
 mostrarImagen(path, threshold)
 
 contornos, _ = cv2.findContours(threshold, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
-cv2.drawContours(threshold, contornos, -1, (0, 255, 0), 2)
-mostrarImagen(path, threshold)
+canvas = np.zeros_like(imagen)
+cv2.drawContours(canvas, contornos, -1, (0, 255, 0), 2)
+plt.axis('off')
+mostrarImagen(path, canvas)
+
+tamaño_patente = 3.07692307692
+min_w=80
+max_w=110
+min_h=25
+max_h=52
+candidatos = []
+for cnt in contornos:
+        x, y, w, h = cv2.boundingRect(cnt)
+        aspecto_patente = float(w) / h
+        if (np.isclose(aspecto_patente, tamaño_patente, atol=0.7) and
+            (max_w > w > min_w) and
+            (max_h > h > min_h)):
+            candidatos.append(cnt)
+canvas = np.zeros_like(imagen)
+cv2.drawContours(canvas, candidatos, -1, (0, 255, 0), 2)
+plt.axis('off')
+mostrarImagen(path, canvas)
+
+ys = []
+for cnt in candidatos:
+    x, y, w, h = cv2.boundingRect(cnt)
+    ys.append(y)
+license = candidatos[np.argmax(ys)]
+canvas = np.zeros_like(imagen)
+cv2.drawContours(canvas, [license], -1, (0, 255, 0), 2)
+plt.axis('off')
+mostrarImagen(path, canvas)
+
