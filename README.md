@@ -1,7 +1,7 @@
 # RECONPAT
 ## Summarize
 
-In this project we are going to do **Object Tracking** Using *OpenCV*. Reconpat is a program for the company *"Caminos De Las Sierras"*. Which has the function of facilitating the use of electronic toll, helping to detect the cars associated with the company. This program identifies the patent of the vehicles and compares them with the patents saved in the system.
+In this project we are going to do **Object Tracking** using *OpenCV*. Reconpat is a program for the company *"Caminos De Las Sierras"*. Which has the function of facilitating the use of the electronic toll, helping to detect the cars associated with the company through a photo. This program identifies the patent of the vehicles.
 
 
 ## Problematic
