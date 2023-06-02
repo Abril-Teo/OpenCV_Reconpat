@@ -13,7 +13,7 @@ def mostrarImagen(path, img):
 
 
 
-path = 'imgs/000.png'
+path = 'imgs/011.png'
 
 imagen = cv2.imread(path)
 mostrarImagen(path, imagen)
