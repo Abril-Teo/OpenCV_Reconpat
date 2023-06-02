@@ -5,6 +5,7 @@ import pytesseract
 import skimage
 import matplotlib.pyplot as plt
 
+pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'  # Path to the Tesseract executable
 
 def mostrarImagen(path, img):
     cv2.imshow(path, img)
@@ -12,7 +13,7 @@ def mostrarImagen(path, img):
 
 
 
-path = 'imgs/007.png'
+path = 'imgs/000.png'
 
 imagen = cv2.imread(path)
 mostrarImagen(path, imagen)
@@ -67,3 +68,13 @@ mostrarImagen(path, threshold_recortado)
 
 bordes = skimage.segmentation.clear_border(threshold_recortado)
 mostrarImagen(path, bordes)
+
+final = cv2.bitwise_not(bordes)
+mostrarImagen(path, final)
+
+psm = 7
+alphanumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+options = "-c tessedit_char_whitelist={}".format(alphanumeric)
+options += " --psm {}".format(psm)
+txt = pytesseract.image_to_string(final, config=options)
+print(txt[:2], txt[2:5], txt[5:-1])
