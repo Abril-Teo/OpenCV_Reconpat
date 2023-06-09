@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'  # Path to the Tesseract executable
 
 
-def Reconpat(path):
+class Reconpat(path):
 
     def mostrarImagen(path, img):
         if (path == 'imgs/001.png'):
@@ -22,7 +22,6 @@ def Reconpat(path):
     cv2.waitKey(0)
 
     gris = cv2.cvtColor(imagen, cv2.COLOR_BGR2GRAY)
-    mostrarImagen(path, gris)
 
     threshold = cv2.threshold(gris, 170, 255, cv2.THRESH_BINARY_INV)[1]
     mostrarImagen(path, threshold)
@@ -81,7 +80,7 @@ def Reconpat(path):
     options += " --psm {}".format(psm)
     txt = pytesseract.image_to_string(final, config=options)
     print(txt[:2], txt[2:5], txt[5:-1])
-    return txt
+
 
 
 
